@@ -27,23 +27,24 @@ The first version of the inverter used identical dimensions for NMOS and PMOS:
 - L = 0.35µm  
 - W = 0.35µm  
 
-**Schematic:**  
-![CMOS Inverter Schematic](./DC%20Analysis/CMOS%20inverter%20cellview.png)
 
-**Testbench:**  
-![Inverter Testbench](./screenshot4.png)
+**Schematic and Testbench Cellviews:**  
+<p align="center">
 
+<img src="./DC%20Analysis/CMOS%20inverter%20cellview.png" alt="CMOS Inverter Schematic" width="500"/>
+<img src="./DC%20Analysis/testbench%20cellview.png" alt="Testbench Schematic" width="500"/>
+</p>
 ---
 
 ## 📊 Simulation Results (Before Optimization)
 
 ### Transient Response
-The inverter was simulated with a 0V–3.3V square input.  
-![Transient Response](./screenshot1.png)
+The inverter was simulated with a 0V–3.3V square input. We can see that the output is inverted as expected.
+<img src="./DC%20Analysis/chronongramme%20temporel.png" alt="Testbench Schematic" width="400"/>
 
 ### DC Sweep
 The transfer characteristic shows a switching threshold around **1.2V**, lower than the ideal mid-supply (1.65V).  
-![DC Sweep](./screenshot3.png)
+<img src="./DC%20Analysis/DC%20caracteristics%20parameter%20sweep.png" alt="Testbench Schematic" width="400"/>
 
 ---
 
@@ -52,13 +53,13 @@ The transfer characteristic shows a switching threshold around **1.2V**, lower t
 To balance the switching threshold, a **parametric sweep of Wp** (PMOS width) was performed:  
 
 - Range: **0.5µm → 2µm**  
-- Objective: Find optimal Wp so that **Vth ≈ Vdd/2**  
+- Objective: Find optimal Wp so that **Vth ≈ Vdd/2 ≈ 1.65V**  
 
 **Sweep Setup:**  
-![Parameter Sweep Settings](./variable%20wp%20settings.png)
+<img src="./Optimization/variable%20wp%20settings.png" alt="Testbench Schematic" width="550"/>
 
 **DC Sweep with Different Wp Values:**  
-![Wp Sweep Results](./wp%20parameter%20sweep.png)
+<img src="./Optimization/wp%20parameter%20sweep.png" alt="Testbench Schematic" width="600"/>
 
 The optimal **Wp ≈ 1.6–1.7µm** balances the inverter, bringing the switching threshold close to 1.65V.
 
@@ -67,19 +68,14 @@ The optimal **Wp ≈ 1.6–1.7µm** balances the inverter, bringing the switchin
 ## 📊 Simulation Results (After Optimization)
 
 ### Optimized Inverter Schematic & Testbench
-**Optimized Cellview:**  
-![Optimized Schematic](./CMOS%20inverter%20cellview.png)
 
-**Optimized Testbench:**  
-![Optimized Testbench](./testbench%20cellview.png)
 
 ### Transient Response
 The rise and fall times are now balanced after sizing optimization.  
-![Optimized Transient](./chronongramme%20temporel.png)
+<img src="./Optimization/chronogramme%20temporel%20plot.png" alt="Testbench Schematic" width="600"/>
 
 ### DC Transfer Characteristic
 The switching point is closer to mid-supply, improving inverter symmetry.  
-![Optimized DC Curve](./DC%20caracteristics%20parameter%20sweep.png)
 
 ---
 
@@ -91,21 +87,20 @@ The final **layout** was designed with proper routing and shared diffusion regio
 - Common source/drain regions used  
 - No DRC violations  
 
-**Layout View:**  
-![Layout View](./Layout%20view.png)
+**Layout and Extracted Views:**  
+<p align="center">
 
-**Extracted View:**  
-![Extracted Layout](./av_extracted%20view.png)
-
+<img src="./Layout/Layout%20view.png" alt="Testbench Schematic" width="400"/> 
+<img src="./Layout/av_extracted%20view.png" alt="Testbench Schematic" width="400"/>
+</p>
 ---
 
 ## 📚 Theoretical Note: Why is PMOS Wider than NMOS?
 Due to the **lower mobility of holes** compared to electrons, PMOS transistors must be wider than NMOS to achieve **balanced drive strength**.  
 In this project, the optimal ratio was found to be:  
 
-\[
-\frac{Wp}{Wn} \approx 3.2
-\]
+$\frac{W_p}{W_n} \approx 3.2$
+
 
 This ensures that the inverter’s **switching threshold is centered**, giving symmetrical rise and fall times.
 
@@ -117,6 +112,3 @@ This ensures that the inverter’s **switching threshold is centered**, giving s
 - The final layout passed **DRC** checks and is LVS clean.  
 - The inverter is now ready to be used as a **standard cell** in digital design flows.  
 
----
-
-## 📂 Repository Structure
