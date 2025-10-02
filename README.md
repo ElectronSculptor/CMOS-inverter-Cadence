@@ -25,10 +25,10 @@ The work includes schematic design, testbench setup, transient/DC simulations, p
 ## 📝 Initial Schematic & Testbench
 The first version of the inverter used identical dimensions for NMOS and PMOS:  
 - L = 0.35µm  
-- W = 0.5µm  
+- W = 0.35µm  
 
 **Schematic:**  
-![CMOS Inverter Schematic](./screenshot2.png)
+![CMOS Inverter Schematic](./DC%20Analysis/CMOS%20inverter%20cellview.png)
 
 **Testbench:**  
 ![Inverter Testbench](./screenshot4.png)
